@@ -52,7 +52,11 @@ static char * outfile_extensions[NUM_OF_OUTFILES] = { ".assembled.fastq",
                                                       ".unassembled.forward.fastq", 
                                                       ".unassembled.reverse.fastq", 
                                                       ".discarded.fastq" };
-
+													  
+int assembly_REVERSE_LONGER (fastqRead * forward, fastqRead * reverse, struct emp_freq * ef, struct user_args  * sw, int nForward, int nReverse);					  
+int assembly_FORWARD_LONGER (fastqRead * forward, fastqRead * reverse, struct emp_freq * ef, struct user_args  * sw, int nForward, int nReverse);
+int assembly_READS_EQUAL (fastqRead * forward, fastqRead * reverse, struct emp_freq * ef, struct user_args  * sw, int n);
+int assembly (fastqRead * left, fastqRead * right, struct user_args  * sw);
 static char * sanityCheckMessage[2] = {
  "\n[!!] Forward reads file contains more lines. Merging is done line-by-line on both files and remaining reads in forward file are ignored. You are strongly advised to check that corresponding paired-end reads are located at the same line numbers in your files.\n\n",
  "\n[!!] Reverse reads file contains more lines. Merging is done line-by-line on both files and remaining reads in reverse file are ignored. You are strongly advised to check that corresponding paired-end reads are located at the same line numbers in your files.\n\n" };
@@ -75,6 +79,7 @@ static unsigned long g_count_assembled   = 0;
 static unsigned long g_count_discarded   = 0;
 static unsigned long g_count_unassembled = 0;
 static unsigned long g_count_total       = 0;
+
 
 
 
